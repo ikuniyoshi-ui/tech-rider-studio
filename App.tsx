@@ -258,9 +258,10 @@ const App: React.FC = () => {
                     className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing p-2 rounded-lg transition-all flex flex-col items-center
                       ${selectedId === item.id ? 'bg-blue-500/10 border border-blue-500 shadow-lg z-10' : 'hover:bg-white/5'}`}
                   >
-                    <span className={`text-4xl transition-transform ${item.direction === 'LEFT' ? '-scale-x-100' : item.direction === 'RIGHT' ? 'scale-x-100' : ''}`}>
-                      {ITEM_DEFAULTS[item.type].icon}
-                    </span>
+                    // --- 修正後（スマホで text-2xl、PCで text-4xl になります） ---
+<span className={`text-2xl md:text-4xl transition-transform ${item.direction === 'LEFT' ? '-scale-x-100' : item.direction === 'RIGHT' ? 'scale-x-100' : ''}`}>
+  {ITEM_DEFAULTS[item.type].icon}
+</span>
                     <span 
                       data-item-label
                       className="mt-1 text-[9px] font-black whitespace-nowrap bg-white text-black px-1.5 py-0.5 rounded shadow-sm uppercase border border-slate-300"
