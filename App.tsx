@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
@@ -83,7 +82,7 @@ const App: React.FC = () => {
     if (!exportAreaRef.current) return null;
     return await html2canvas(exportAreaRef.current, {
       backgroundColor: '#ffffff',
-      scale: 3, // 高解像度
+      scale: 3, 
       logging: false,
       useCORS: true,
       onclone: (clonedDoc) => {
@@ -109,7 +108,6 @@ const App: React.FC = () => {
             printEl.style.fontWeight = 'bold';
           });
 
-          // 文字色を絶対的な黒(#000000)にし、フォントを太くする
           clonedArea.querySelectorAll('table, th, td, span, h1, h2, p, div').forEach(node => {
             const el = node as HTMLElement;
             el.style.color = '#000000';
@@ -148,7 +146,7 @@ const App: React.FC = () => {
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'px',
-      format: [canvas.width / 2, canvas.height / 2] // スケール調整
+      format: [canvas.width / 2, canvas.height / 2]
     });
     pdf.addImage(imgData, 'JPEG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
     pdf.save(`TechRider_${bandInfo.name || 'band'}.pdf`);
@@ -162,9 +160,7 @@ const App: React.FC = () => {
         <h1 className="text-3xl font-black tracking-tight text-white uppercase">
           Tech Rider <span className="text-blue-500">Studio Pro</span>
         </h1>
-        <p className="text-slate-400 text-sm font-medium">
-          norké presents.
-        </p>
+        <p className="text-slate-400 text-sm font-medium">norké presents.</p>
       </header>
 
       <section className="glass-panel p-6 md:p-8 space-y-6 no-print">
@@ -255,16 +251,16 @@ const App: React.FC = () => {
                     key={item.id}
                     onPointerDown={(e) => handlePointerDown(e, item.id)}
                     style={{ left: `${item.x}%`, top: `${item.y}%` }}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing p-2 rounded-lg transition-all flex flex-col items-center
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing p-1 md:p-2 rounded-lg transition-all flex flex-col items-center
                       ${selectedId === item.id ? 'bg-blue-500/10 border border-blue-500 shadow-lg z-10' : 'hover:bg-white/5'}`}
                   >
-                    // --- 修正後（スマホで text-2xl、PCで text-4xl になります） ---
-<span className={`text-2xl md:text-4xl transition-transform ${item.direction === 'LEFT' ? '-scale-x-100' : item.direction === 'RIGHT' ? 'scale-x-100' : ''}`}>
-  {ITEM_DEFAULTS[item.type].icon}
-</span>
+                    {/* 修正: スマホでは text-xl (さらに小さく)、PCでは text-4xl に調整 */}
+                    <span className={`text-xl md:text-4xl transition-transform ${item.direction === 'LEFT' ? '-scale-x-100' : item.direction === 'RIGHT' ? 'scale-x-100' : ''}`}>
+                      {ITEM_DEFAULTS[item.type].icon}
+                    </span>
                     <span 
                       data-item-label
-                      className="mt-1 text-[9px] font-black whitespace-nowrap bg-white text-black px-1.5 py-0.5 rounded shadow-sm uppercase border border-slate-300"
+                      className="mt-1 text-[7px] md:text-[9px] font-black whitespace-nowrap bg-white text-black px-1 md:px-1.5 py-0.5 rounded shadow-sm uppercase border border-slate-300"
                     >
                       {item.label}
                     </span>
@@ -334,7 +330,6 @@ const App: React.FC = () => {
                 ))}
               </tbody>
             </table>
-            {items.length === 0 && <p className="text-center py-4 font-bold">No inputs defined.</p>}
           </div>
         </section>
       </div>
