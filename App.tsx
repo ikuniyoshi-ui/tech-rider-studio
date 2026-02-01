@@ -163,7 +163,7 @@ const App: React.FC = () => {
         <p className="text-slate-400 text-sm font-medium">norké presents.</p>
       </header>
 
-      <section className="glass-panel p-6 md:p-8 space-y-6 no-print">
+      <section className="glass-panel p-4 md:p-8 space-y-6 no-print">
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1">
             <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Band Name</label>
@@ -205,17 +205,17 @@ const App: React.FC = () => {
                   setBandInfo({...bandInfo, type: t});
                   applyTemplate(t, bandInfo.members);
                 }}
-                className={`px-6 h-12 rounded-lg font-bold transition-all border ${bandInfo.type === t ? 'bg-white text-black border-white' : 'bg-[#121419] border-[#2d333b] text-slate-500 hover:border-slate-400'}`}
+                className={`px-4 md:px-6 h-12 rounded-lg font-bold transition-all border ${bandInfo.type === t ? 'bg-white text-black border-white' : 'bg-[#121419] border-[#2d333b] text-slate-500 hover:border-slate-400'}`}
               >
-                {t === 'BAND' ? '生バンド' : t === 'ELECTRONIC' ? '宅録/Hybrid' : 'DJ/MC'}
+                {t === 'BAND' ? '生バンド' : t === 'ELECTRONIC' ? 'Hybrid' : 'DJ/MC'}
               </button>
             ))}
           </div>
         </div>
       </section>
 
-      <div ref={exportAreaRef} data-export-container className="bg-[#121419] rounded-2xl border border-[#2d333b] overflow-hidden">
-        <section className="p-4 md:p-8 relative">
+      <div ref={exportAreaRef} data-export-container className="bg-[#121419] rounded-2xl border border-[#2d333b] overflow-hidden shadow-2xl">
+        <section className="p-3 md:p-8 relative">
           <div className="print-only mb-8 text-black border-b-2 border-black pb-4">
             <h1 className="text-4xl font-black uppercase text-black">{bandInfo.name || 'TECH RIDER'}</h1>
             <div className="flex gap-4 mt-2 font-bold text-sm text-black">
@@ -226,13 +226,13 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex flex-col md:flex-row gap-6">
-            <div className="md:w-20 flex md:flex-col flex-wrap gap-3 no-print">
+            <div className="md:w-20 flex md:flex-col flex-wrap gap-2 md:gap-3 no-print">
               {(Object.keys(ITEM_DEFAULTS) as ItemType[]).map(type => (
                 <button
                   key={type}
                   onClick={() => handleAddItem(type)}
                   title={ITEM_DEFAULTS[type].label}
-                  className="w-full aspect-square bg-slate-800 border border-slate-700 rounded-lg flex items-center justify-center text-2xl hover:bg-slate-700 transition-all active:scale-95"
+                  className="w-12 h-12 md:w-full md:aspect-square bg-slate-800 border border-slate-700 rounded-lg flex items-center justify-center text-xl md:text-2xl hover:bg-slate-700 transition-all active:scale-95 shadow-inner"
                 >
                   {ITEM_DEFAULTS[type].icon}
                 </button>
@@ -240,7 +240,7 @@ const App: React.FC = () => {
             </div>
 
             <div className="flex-1">
-              <div className="text-center font-bold text-slate-600 text-[10px] uppercase tracking-widest mb-2 no-print">Audience / Front</div>
+              <div className="text-center font-bold text-slate-600 text-[8px] md:text-[10px] uppercase tracking-[0.3em] mb-2 no-print opacity-50">Audience / Front</div>
               <div 
                 ref={stageRef}
                 data-stage
@@ -251,48 +251,48 @@ const App: React.FC = () => {
                     key={item.id}
                     onPointerDown={(e) => handlePointerDown(e, item.id)}
                     style={{ left: `${item.x}%`, top: `${item.y}%` }}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing p-1 md:p-2 rounded-lg transition-all flex flex-col items-center
-                      ${selectedId === item.id ? 'bg-blue-500/10 border border-blue-500 shadow-lg z-10' : 'hover:bg-white/5'}`}
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing p-0.5 md:p-2 rounded-lg transition-all flex flex-col items-center
+                      ${selectedId === item.id ? 'bg-blue-500/20 border border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)] z-10' : 'hover:bg-white/5'}`}
                   >
-                    {/* 修正: スマホでは text-xl (さらに小さく)、PCでは text-4xl に調整 */}
-                    <span className={`text-xl md:text-4xl transition-transform ${item.direction === 'LEFT' ? '-scale-x-100' : item.direction === 'RIGHT' ? 'scale-x-100' : ''}`}>
+                    {/* アイコンサイズ: スマホ(base), 小タブ(2xl), PC(4xl) の3段階設定 */}
+                    <span className={`text-base sm:text-2xl md:text-4xl transition-transform ${item.direction === 'LEFT' ? '-scale-x-100' : item.direction === 'RIGHT' ? 'scale-x-100' : ''}`}>
                       {ITEM_DEFAULTS[item.type].icon}
                     </span>
                     <span 
                       data-item-label
-                      className="mt-1 text-[7px] md:text-[9px] font-black whitespace-nowrap bg-white text-black px-1 md:px-1.5 py-0.5 rounded shadow-sm uppercase border border-slate-300"
+                      className="mt-0.5 text-[6px] sm:text-[8px] md:text-[10px] font-black whitespace-nowrap bg-white text-black px-1 py-0 rounded shadow-sm uppercase border border-slate-300 scale-90 md:scale-100"
                     >
                       {item.label}
                     </span>
                     {item.isBrought && (
-                      <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-blue-500 rounded-full border border-black shadow-sm"></div>
+                      <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-blue-500 rounded-full border border-black shadow-sm"></div>
                     )}
                   </div>
                 ))}
               </div>
-              <div className="text-center font-bold text-slate-600 text-[10px] uppercase tracking-widest mt-2 no-print">Artist / Back</div>
+              <div className="text-center font-bold text-slate-600 text-[8px] md:text-[10px] uppercase tracking-[0.3em] mt-2 no-print opacity-50">Artist / Back</div>
             </div>
           </div>
 
           {selectedItem && (
-            <div className="mt-6 p-6 bg-[#1a1d23] rounded-xl border border-slate-700 no-print space-y-4">
+            <div className="mt-4 md:mt-6 p-4 md:p-6 bg-[#1a1d23] rounded-xl border border-slate-700 no-print space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Editing: {selectedItem.label}</span>
-                <button onClick={() => deleteItem(selectedItem.id)} className="text-xs text-red-400 font-bold hover:underline">Delete</button>
+                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest italic">Editing: {selectedItem.label}</span>
+                <button onClick={() => deleteItem(selectedItem.id)} className="text-[10px] text-red-500 font-black hover:bg-red-500/10 px-2 py-1 rounded transition-colors uppercase">Delete</button>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <input 
                   type="text" 
                   value={selectedItem.label} 
                   onChange={(e) => updateItem(selectedItem.id, { label: e.target.value })}
-                  className="bg-slate-900 border border-slate-700 rounded p-2 text-sm outline-none focus:border-blue-500 text-white"
+                  className="bg-black border border-slate-800 rounded p-3 text-xs outline-none focus:border-blue-500 text-white font-bold"
                 />
-                <div className="flex gap-1 bg-slate-900 p-1 rounded border border-slate-700">
+                <div className="flex gap-1 bg-black p-1 rounded border border-slate-800">
                   {(['LEFT', 'CENTER', 'RIGHT'] as const).map(d => (
                     <button 
                       key={d}
                       onClick={() => updateItem(selectedItem.id, { direction: d })}
-                      className={`flex-1 py-1 rounded text-[9px] font-bold uppercase transition-all ${selectedItem.direction === d ? 'bg-blue-600 text-white' : 'text-slate-500'}`}
+                      className={`flex-1 py-2 rounded text-[8px] font-black uppercase transition-all ${selectedItem.direction === d ? 'bg-blue-600 text-white' : 'text-slate-600 hover:text-slate-400'}`}
                     >
                       {d}
                     </button>
@@ -300,7 +300,7 @@ const App: React.FC = () => {
                 </div>
                 <button 
                   onClick={() => updateItem(selectedItem.id, { isBrought: !selectedItem.isBrought })}
-                  className={`py-1 px-4 rounded text-[10px] font-bold border transition-all ${selectedItem.isBrought ? 'bg-blue-600 border-blue-400 text-white' : 'border-slate-700 text-slate-500'}`}
+                  className={`py-2 px-4 rounded text-[9px] font-black border transition-all uppercase ${selectedItem.isBrought ? 'bg-blue-600 border-blue-400 text-white' : 'border-slate-800 text-slate-600 hover:border-slate-500'}`}
                 >
                   {selectedItem.isBrought ? '持込ギア' : 'ライブハウス備品'}
                 </button>
@@ -312,7 +312,7 @@ const App: React.FC = () => {
             <h2 className="text-xl font-black mb-4 border-b-2 border-black uppercase tracking-tight text-black">Input List & Signal Info</h2>
             <table className="w-full border-collapse border border-black text-sm text-black">
               <thead>
-                <tr className="bg-gray-200">
+                <tr className="bg-gray-100">
                   <th className="border border-black p-2 text-left font-black text-black">Ch</th>
                   <th className="border border-black p-2 text-left font-black text-black">Instrument</th>
                   <th className="border border-black p-2 text-left font-black text-black">Connection</th>
@@ -334,18 +334,18 @@ const App: React.FC = () => {
         </section>
       </div>
 
-      <section className="glass-panel p-6 no-print space-y-4">
-        <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-700 pb-2">Signals & Connections</h3>
+      <section className="glass-panel p-4 md:p-6 no-print space-y-4">
+        <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] border-b border-slate-700 pb-2">Signals & Connections</h3>
         <div className="grid gap-2">
           {items.map(item => (
-            <div key={item.id} className="flex items-center justify-between p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-              <span className="font-bold text-xs uppercase">{item.label}</span>
-              <div className="flex gap-1">
+            <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-black/40 rounded-lg border border-slate-800 gap-3">
+              <span className="font-black text-[11px] uppercase tracking-wider pl-2 border-l-2 border-blue-500">{item.label}</span>
+              <div className="flex gap-1 overflow-x-auto pb-1 sm:pb-0">
                 {(['AMP', 'DI', 'PC', 'UNKNOWN'] as ConnectionType[]).map(conn => (
                   <button
                     key={conn}
                     onClick={() => updateItem(item.id, { connection: conn })}
-                    className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase transition-all ${item.connection === conn ? 'bg-white text-black' : 'text-slate-500 border border-slate-800 hover:border-slate-700'}`}
+                    className={`whitespace-nowrap px-3 py-1.5 rounded text-[8px] font-black uppercase transition-all ${item.connection === conn ? 'bg-white text-black' : 'text-slate-600 border border-slate-800 hover:border-slate-600'}`}
                   >
                     {CONNECTION_LABELS[conn].split(' ')[0]}
                   </button>
@@ -359,20 +359,20 @@ const App: React.FC = () => {
       <section className="no-print pt-6 flex flex-col md:flex-row gap-4">
         <button 
           onClick={handleExportPDF}
-          className="flex-1 bg-blue-600 text-white py-5 rounded-xl font-black text-lg hover:bg-blue-500 transition-all btn-studio shadow-lg shadow-blue-900/20 uppercase"
+          className="flex-1 bg-blue-600 text-white py-5 rounded-xl font-black text-base hover:bg-blue-500 transition-all btn-studio shadow-xl shadow-blue-900/20 uppercase tracking-widest active:translate-y-1"
         >
           PDFファイルを保存
         </button>
         <button 
           onClick={handleExportImage}
-          className="flex-1 bg-slate-800 text-white py-5 rounded-xl font-black text-lg hover:bg-slate-700 border border-slate-700 transition-all btn-studio uppercase"
+          className="flex-1 bg-slate-800 text-white py-5 rounded-xl font-black text-base hover:bg-slate-700 border border-slate-700 transition-all btn-studio uppercase tracking-widest active:translate-y-1"
         >
           JPG画像を保存
         </button>
       </section>
 
-      <footer className="no-print text-center py-8 text-slate-600 font-mono text-[10px] uppercase tracking-widest">
-        Quick Tech Rider Studio Pro // Rel. 2024.12
+      <footer className="no-print text-center py-12 text-slate-700 font-mono text-[9px] uppercase tracking-[0.6em]">
+        Quick Tech Rider Studio Pro // Rel. 2026.02
       </footer>
     </div>
   );
