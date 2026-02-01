@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Tech Rider - Studio Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --studio-bg: #0f1115;
+            --panel-bg: #1a1d23;
+            --accent: #3b82f6;
+            --border: #2d333b;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--studio-bg);
+            color: #e6edf3;
+            overflow-x: hidden;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body, html {
+                background-color: white !important;
+                color: black !important;
+            }
+            * {
+                color: black !important;
+                border-color: black !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .stage-grid {
+                background-image: radial-gradient(#aaa 1px, transparent 1px) !important;
+                background-color: #fff !important;
+                border: 2px solid black !important;
+            }
+            table {
+                border-collapse: collapse !important;
+                width: 100% !important;
+            }
+            th, td {
+                border: 1px solid black !important;
+                color: black !important;
+                font-weight: 700 !important;
+            }
+        }
+        .print-only {
+            display: none;
+        }
+        .stage-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glass-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .btn-studio {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-studio:active {
+            transform: scale(0.97);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--studio-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+</body>
+</html>
